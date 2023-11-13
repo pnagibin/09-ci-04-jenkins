@@ -16,7 +16,4 @@ pipeline {
             } 
         }
     }
-    else {
-         echo "Not equal - skipping the stage"
-    }
 }
