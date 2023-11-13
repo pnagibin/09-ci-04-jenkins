@@ -76,10 +76,48 @@ https://github.com/pnagibin/09-ci-04-jenkins/blob/master/pipeline/DeclarativePip
 
 6. Внести необходимые изменения, чтобы Pipeline запускал `ansible-playbook` без флагов `--check --diff`, если не установлен параметр при запуске джобы (prod_run = True). По умолчанию параметр имеет значение False и запускает прогон с флагами `--check --diff`.
 
+![Alt text](image-14.png)
 
+![Alt text](image-15.png)
+
+```
+pipeline {
+    agent {
+  label 'ansible'
+    }
+    stages {
+        stage('git') {
+            when { expression { return params.prod_run } }
+            steps {
+                git 'https://github.com/pnagibin/08-ansible-05-testing/'
+            } 
+        }
+        stage('Molecule') {
+            when { expression { return params.prod_run } }
+            steps {
+                sh 'molecule test'
+            } 
+        }
+    }
+}
+```
 
 7. Проверить работоспособность, исправить ошибки, исправленный Pipeline вложить в репозиторий в файл `ScriptedJenkinsfile`.
+
+Я оформил несколько Jenkins файлов:
+
+```
+https://github.com/pnagibin/09-ci-04-jenkins/blob/master/pipeline/DeclarativePipeline
+https://github.com/pnagibin/09-ci-04-jenkins/blob/master/pipeline/Jenkinsfile
+https://github.com/pnagibin/09-ci-04-jenkins/blob/master/pipeline/prod_run
+```
+
 8. Отправить ссылку на репозиторий с ролью и Declarative Pipeline и Scripted Pipeline.
+
+```
+https://github.com/pnagibin/08-ansible-05-testing - Роль
+https://github.com/pnagibin/09-ci-04-jenkins - Pipeline
+```
 9.  Сопроводите процесс настройки скриншотами для каждого пункта задания!!
 
 ## Необязательная часть
