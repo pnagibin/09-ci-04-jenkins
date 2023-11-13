@@ -1,0 +1,17 @@
+pipeline {
+    agent {
+  label 'ansible'
+    }
+    stages {
+        stage('git') {
+            steps {
+                git 'https://github.com/pnagibin/08-ansible-05-testing/'
+            } 
+        }
+        stage('Molecule') {
+            steps {
+                sh 'molecule test'
+            } 
+        }
+    }
+}
