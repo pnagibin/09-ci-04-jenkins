@@ -3,21 +3,20 @@ pipeline {
   label 'ansible'
     }
     stages {
-        if(params.prod_run) {
-            stage('git') {
-                steps {
-                    git 'https://github.com/pnagibin/08-ansible-05-testing/'
-                } 
-            }
-            stage('Molecule') {
-                steps {
-                    sh 'molecule test'
-                } 
-            }
+        stage('git') {
+            when { expression { return params.prod_run } }
+            steps {
+                git 'https://github.com/pnagibin/08-ansible-05-testing/'
+            } 
         }
+        stage('Molecule') {
+            when { expression { return params.prod_run } }
+            steps {
+                sh 'molecule test'
+            } 
+        }
+    }
     else {
          echo "Not equal - skipping the stage"
     }
-    }
-   
 }
