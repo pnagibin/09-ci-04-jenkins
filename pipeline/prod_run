@@ -2,8 +2,8 @@ pipeline {
     agent {
   label 'ansible'
     }
-    if(params.prod_run) {
-        stages {
+    stages {
+        if(params.prod_run) {
             stage('git') {
                 steps {
                     git 'https://github.com/pnagibin/08-ansible-05-testing/'
@@ -15,8 +15,9 @@ pipeline {
                 } 
             }
         }
-    }
     else {
          echo "Not equal - skipping the stage"
     }
+    }
+   
 }
