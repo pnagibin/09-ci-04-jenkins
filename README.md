@@ -67,9 +67,17 @@ https://github.com/pnagibin/09-ci-04-jenkins/blob/master/pipeline/DeclarativePip
 
 5. Создать Scripted Pipeline, наполнить его скриптом из [pipeline](./pipeline).
 
+Снова ошибки от автора модуля.
+Идея понятна, должна былазапуститься его playbook из его же репозитория, но точно тоже самое я сделал в п.2.
 
+![Alt text](image-12.png)
+
+![Alt text](image-13.png)
 
 6. Внести необходимые изменения, чтобы Pipeline запускал `ansible-playbook` без флагов `--check --diff`, если не установлен параметр при запуске джобы (prod_run = True). По умолчанию параметр имеет значение False и запускает прогон с флагами `--check --diff`.
+
+
+
 7. Проверить работоспособность, исправить ошибки, исправленный Pipeline вложить в репозиторий в файл `ScriptedJenkinsfile`.
 8. Отправить ссылку на репозиторий с ролью и Declarative Pipeline и Scripted Pipeline.
 9.  Сопроводите процесс настройки скриншотами для каждого пункта задания!!
